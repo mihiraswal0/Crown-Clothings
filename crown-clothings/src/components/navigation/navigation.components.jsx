@@ -14,9 +14,13 @@ const Navigation=()=>{
             </Link>
             {/* <div>Logo</div> */}
                 {/* <h1>Naviagtion Bar</h1> */}
-                <div className="links-container">
-                  <Link className="nav-links" to='./shop'>
-                    Shop
+                <div className="nav-links-container">
+                  <Link className="nav-link" to='./shop'>
+                    SHOP
+                  </Link>
+
+                  <Link className="nav-link" to='./sign-in'>
+                    SIGN IN
                   </Link>
 
                 </div>
