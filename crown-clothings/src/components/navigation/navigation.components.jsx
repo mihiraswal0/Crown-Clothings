@@ -26,7 +26,7 @@ const  Navigation=()=>{
                 </div>
                 
                 </div>     
-          <Outlet/>
+           <Outlet/>
         </Fragment>
         
           )
