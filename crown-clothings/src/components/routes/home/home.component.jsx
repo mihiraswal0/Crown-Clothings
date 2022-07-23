@@ -10,7 +10,7 @@ const Home=()=> {
         "imageUrl": "https://i.ibb.co/cvpntL1/hats.png"
       },
       {
-        "id": 2,
+        "id": 2, 
         "title": "jackets",
         "imageUrl": "https://i.ibb.co/px2tCc3/jackets.png"
       },
@@ -34,7 +34,7 @@ const Home=()=> {
   ]
  return (
    <div>
-     {/* <Outlet /> */}
+     
       <Directory categories={categories}/>
    </div>
   //  <Directory categories={categories}/>
