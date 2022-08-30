@@ -9,7 +9,7 @@ import {getFirestore,doc,getDoc,setDoc} from 'firebase/firestore';
 const firebaseConfig = {
     apiKey: "AIzaSyBgz4uIxNy45b4k0cgKo7kgflKMK3Ah89k",
     authDomain: "crown-clothing-db-b643c.firebaseapp.com",
-    projectId: "crown-clothing-db-b643c",
+    projectId : "crown-clothing-db-b643c",
     storageBucket: "crown-clothing-db-b643c.appspot.com",
     messagingSenderId: "480844482793",
     appId: "1:480844482793:web:1999a5c13e3c17a46dc878"
@@ -34,9 +34,9 @@ const firebaseConfig = {
     return;
     
     const userDocRef=doc(db,'users',userAuth.uid);
-    // console.log(userDocRef);
-    const userSnapshot=await getDoc(userDocRef);
-    //if user doesnt exist
+     //console.log(userDocRef);
+     const userSnapshot=await getDoc(userDocRef);
+    // //if user doesnt exist
     if(!userSnapshot.exists())
     {
       const {displayName,email}=userAuth;
@@ -54,7 +54,7 @@ const firebaseConfig = {
       }
     }
 
-    return userDocRef;
+    // return userDocRef;
     
     //if user exist
 
