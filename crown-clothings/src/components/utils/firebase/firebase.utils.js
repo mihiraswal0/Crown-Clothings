@@ -26,7 +26,8 @@ const firebaseConfig = {
   });
   export const auth =getAuth();
   export const signInWithGooglePopup=()=>signInWithPopup(auth ,provider) 
-//creating datanase
+  export const signInWithGoogleRedirect=()=>signInWithRedirect(auth,provider);
+    //creating datanase
 
   export const db=getFirestore();
   export const createUserDocumentFromAuth=async(userAuth,additionalInfromation)=>{
