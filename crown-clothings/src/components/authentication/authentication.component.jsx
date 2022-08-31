@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { signInWithGooglePopup ,createUserDocumentFromAuth,signInWithGoogleRedirect} from "../utils/firebase/firebase.utils"
 import SignUpForm from "../sign-up-form/sign-up-form.component";
 import SignInForm from "../sign-in-form/sign-in-form.component";
-
+import './authentication.styles.scss';
 const Authentication=()=>{
  
     const logGoogleUser=async()=>{
@@ -12,8 +12,8 @@ const Authentication=()=>{
        // console.log(response)
     }
    
-    return (<div>
-        <h1>Sign In Page</h1>
+    return (<div className="authentication-container">
+        {/* <h1>Sign In Page</h1> */}
        
             {/* <button onClick={logGoogleUser}>Sign in Google Popup</button> */}
             {/* <button onClick={logGoogleRedirectUser}>Sign in Google Redirect</button> */}

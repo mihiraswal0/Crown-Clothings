@@ -7,6 +7,7 @@ import {
   // createAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
   createUserDocumentFromAuth,
+  signInAuthUserWithEmailAndPassword
 } from '../utils/firebase/firebase.utils';
 
  import './sign-in-form.styles.scss';
@@ -34,11 +35,19 @@ const SignInForm = () => {
 
     
     try {
+      const response=await signInAuthUserWithEmailAndPassword(email,password)
+     console.log(response)
       resetFormFields();
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         alert('Cannot create user, email already in use');
-      } else {
+      }else if(error.code==='auth/wrong-password'){
+        alert('Incorrect Password');
+      }
+      else if(error.code==='auth/user-not-found'){
+        alert('No User Found with following Credential');
+      }
+      else {
         console.log('user creation encountered an error', error);
       }
     }
@@ -75,9 +84,12 @@ const SignInForm = () => {
           value={password}
         />
         
-        <Button type='submit'>Sign In</Button>
-        <Button onClick={signInWithGoogle}>Google Sign In</Button>
-      
+        <div className='buttons-container'>
+          <Button type='submit'>Sign In</Button>
+          <Button type='button' buttonType='google' onClick={signInWithGoogle}>
+            Google sign in
+          </Button>
+        </div>
       </form>
     </div>
   );
