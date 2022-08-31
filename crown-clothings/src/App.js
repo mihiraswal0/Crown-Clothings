@@ -2,12 +2,8 @@
  import Home from "./components/routes/home/home.component";
  import Navigation from "./components/navigation/navigation.components";
 import Authentication from "./components/authentication/authentication.component";
- const Shop=()=>{
-   return(
-   <div>
-     <h1>shop hu</h1>
-   </div>)
- } 
+import Shop from "./components/shop/shop.component";
+
 
  const App=()=> {
   return (
