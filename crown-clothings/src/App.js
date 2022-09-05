@@ -9,7 +9,7 @@ import Checkout from "./components/routes/checkout/checkout.component";
     <Routes>
       <Route path="/" element={<Navigation/>}>
         <Route index={true} element={<Home/>}/>
-        <Route path="shop" element={<Shop/>}/>
+        <Route path='shop/*'element={<Shop/>}/>
         {/* <Route path="auth" element={<Authentication/>}/> */}
          <Route path="auth" element={<Authentication/>}></Route>
          <Route path="checkout" element={<Checkout/>}></Route>

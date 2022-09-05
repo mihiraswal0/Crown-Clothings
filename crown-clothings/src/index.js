@@ -4,21 +4,24 @@ import './index.css';
 import {BrowserRouter} from 'react-router-dom';
 import App from './App';
 import { UserProvider } from './context/user.context';
-import { ProductsContext, ProductsProvider } from './context/product.context';
+import { CategoriesProvider } from './context/categories.context';
 import { CartProvider } from './context/cart.context';
 import reportWebVitals from './reportWebVitals';
-
+import {Elements} from '@stripe/stripe-js'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
     <UserProvider>
-      <ProductsProvider>
+      <CategoriesProvider>
         <CartProvider>
-        <App />
+          <Elements>
+          <App />
+          </Elements>
+        
         </CartProvider>
       
-      </ProductsProvider>
+      </CategoriesProvider>
     </UserProvider>
    
     </BrowserRouter>
