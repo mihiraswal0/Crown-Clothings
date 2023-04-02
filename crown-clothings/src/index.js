@@ -7,12 +7,14 @@ import { UserProvider } from './context/user.context';
 import { CategoriesProvider } from './context/categories.context';
 import { CartProvider } from './context/cart.context';
 import reportWebVitals from './reportWebVitals';
-import {Elements} from '@stripe/stripe-js'
+// import {Elements} from '@stripe/stripe-js
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import { stripePromise } from './components/utils/stripe/stripe.utils';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter>  
     <UserProvider>
       <CategoriesProvider>
         <CartProvider>

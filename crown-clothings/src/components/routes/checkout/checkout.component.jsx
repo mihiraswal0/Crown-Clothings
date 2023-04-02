@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { CartContext } from '../../../context/cart.context';
 import CheckoutItem from '../../checkout-item/checkout-item.component';
 import './checkout.styles.scss';
-
+import PaymentForm from '../../payment-form/payment-form.component'
 const Checkout = () => {
     const { cartItems, cartTotal,addItemToCart,removeItemToCart} = useContext(CartContext);
     return (
@@ -28,6 +28,7 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <div className='total'>TOTAL: ₹ {cartTotal}</div>
+        <PaymentForm/>
     </div>
     )
 };

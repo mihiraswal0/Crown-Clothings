@@ -1,7 +1,7 @@
 import { useState,useContext } from 'react';
 
  import FormInput from '../form-input/form-input.component';
- import Button from '../button/button.componet';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.componet';
 import { UserContext } from '../../context/user.context';
 import {
   // createAuthUserWithEmailAndPassword,
@@ -17,7 +17,7 @@ const defaultFormFields = {
   email: '',
   password: '',
   };
-
+  
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const {  email, password } = formFields;
@@ -88,7 +88,7 @@ const SignInForm = () => {
         
         <div className='buttons-container'>
           <Button type='submit'>Sign In</Button>
-          <Button type='button' buttonType='google' onClick={signInWithGoogle}>
+          <Button type='button' buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>
             Google sign in
           </Button>
         </div>
