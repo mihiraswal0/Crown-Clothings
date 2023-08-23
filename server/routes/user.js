@@ -12,7 +12,7 @@ router.put('/:id',verifyTokenAndAuthenticate,async(req,res)=>{
         const updatedUser=await User.findByIdAndUpdate({_id:req.params.id},{
             $set:req.body
         },{new:true});
-        res.status(200).send({status:"true",message:"User Successfully verified"});
+        res.status(200).send({status:"success",message:"User Successfully verified"});
     }
     catch(err){
         res.status(500).json({status:"fail",message:err.message});
@@ -22,10 +22,10 @@ router.put('/:id',verifyTokenAndAuthenticate,async(req,res)=>{
 router.delete("/:id",verifyTokenAndAuthenticate,async(req,res)=>{
     try{
         await UserByIdAndDelete(req.params.id);
-        return res.status(200).send({success:true,message:"User Deleted Successfully"});
+        return res.status(200).send({status:"success",message:"User Deleted Successfully"});
     }
     catch(err){
-        res.status(500).send({success:false,message:err.message});
+        res.status(500).send({status:"fail",message:err.message});
     }
 
 })
@@ -33,21 +33,21 @@ router.get("/:id",verifyTokenAndAdmin,async(req,res)=>{
     try{
        const findUser=await User.findById(req.params.id);
        findUser.password=undefined;
-       res.status(200).send({success:true,message:findUser});
+       res.status(200).send({status:"success",message:findUser});
     }
     catch(err){
-        res.status(500).send({success:false,message:err.message});
+        res.status(500).send({status:"fail",message:err.message});
     }
 
 })
-router.get("/",verifyTokenAndAdmin,async(req,res)=>{
+router.get("/",async(req,res)=>{
     try{
        const allUser=await User.find();
     //    findUser.password=undefined;
-       res.status(200).send({success:true,message:allUser});
+       res.status(200).send({status:"success",message:allUser});
     }
     catch(err){
-        res.status(500).send({success:false,message:err.message});
+        res.status(500).send({status:"fail",message:err.message});
     }
 
 })
