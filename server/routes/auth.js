@@ -1,7 +1,8 @@
 const express = require('express');
 const router=express.Router();
 const User=require('../models/User.js');
- const cryptojs=require('crypto-js');
+const cryptojs=require('crypto-js');
+const jwt=require('jsonwebtoken');
 require('dotenv').config(); 
 
 router.post("/register",async(req,res)=>{
@@ -39,7 +40,9 @@ router.post("/register",async(req,res)=>{
         {
             return res.status(500).json({status:"fail",message:"Invalid Password"});
         }
-        return res.json({status:"success",message:findUser});
+        const accessToken = jwt.sign({id:findUser._id,isAdmin:findUser.isAdmin},process.env.JWT_SECRET_KEY,{expiresIn:'3d'});
+
+        return res.json({status:"success",message:{...findUser,accessToken}});
     }
     catch(err){
         return res.status(500).json({status:"fail",message:err.message});
