@@ -44,7 +44,7 @@ router.get("/",verifyTokenAndAdmin,async(req,res)=>{
     try{
        const allUser=await User.find();
     //    findUser.password=undefined;
-       res.status(200).send({success:true,message:findUser});
+       res.status(200).send({success:true,message:allUser});
     }
     catch(err){
         res.status(500).send({success:false,message:err.message});

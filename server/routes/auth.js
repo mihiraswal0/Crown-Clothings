@@ -11,7 +11,8 @@ router.post("/register",async(req,res)=>{
     const newUser=new User({
         username: req.body.username,
         email: req.body.email,
-        password: cryptojs.AES.encrypt(req.body.password,process.env.SECRET_KEY)
+        password: cryptojs.AES.encrypt(req.body.password,process.env.SECRET_KEY),
+        isAdmin:(req.body.isAdmin)?true:false
     })
     try{
     const saveuser=await newUser.save();
