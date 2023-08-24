@@ -52,4 +52,18 @@ router.get('/find/:id',async(req,res)=>{
         return res.status(500).json({status:"fail",message:err.message});
     }
 })
+// router.get('/',(req,res)=>{
+//     const category=req.query.category;
+//     let allProducts;
+//     if(category){
+//         allProducts = Product.find({
+//             categories:{
+//                 $in:[category],
+//             },
+//         })
+//     }
+//     else
+//     allProducts = Product.find();
+//     res.status(200).json({status:"success",message:allProducts});
+// })
 module.exports=router;
