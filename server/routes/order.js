@@ -1,7 +1,7 @@
 const Order=require('../models/Order.js');
 const express=require('express');
 const { verifyTokenAndAdmin,verifyTokenAndAuthenticate } = require('./verifyToken.js');
-const router=express.Router();
+const  router=express.Router();
 
 
 //add product
@@ -45,12 +45,20 @@ router.get('/',async(req,res)=>{
 })
 router.get('/find/:id',async(req,res)=>{
     try{
-        const order=await Order.findById(req.params.id);
+        const order=await Order.find({userId:req.params.id});
         return res.status(200).json({status:"success",message:order});
     }
     catch(err){
         return res.status(500).json({status:"fail",message:err.message});
     }
 })
+router.get("/", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const carts = await Cart.find();
+    res.status(200).json(carts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports=router;

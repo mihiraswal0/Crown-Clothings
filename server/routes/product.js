@@ -5,11 +5,12 @@ const router=express.Router();
 
 
 //add product
-router.post('/',verifyTokenAndAdmin,async(req,res)=>{
+router.post('/',async(req,res)=>{
     const newProduct=new Product(req.body);
+    // console.log(newProduct)
     try{
-        const savedProduct=await new Product.save();
-       return res.status(200).json({status:"success",message:savedProduct()});
+        const savedProduct=await newProduct.save();
+       return res.status(200).json({status:"success",message:savedProduct});
     }
     catch(err){
         return res.status(500).json({status:"fail",message:err.message});
@@ -33,37 +34,42 @@ router.delete('/:id',verifyTokenAndAdmin,async(req,res)=>{
         return res.status(500).json({status:"fail",message:err.message});
     }
 })
-//all products
-router.get('/',async(req,res)=>{
-    try{
-    const products= await Product.find();
-        return res.status(200).json({status:"success",message:products});
+router.get("/find/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json({status:"success",message:product});
+  } catch (err) {
+    res.status(500).json({status:"error",message:err.message});
+  }
+});
+
+
+
+  
+  //GET ALL PRODUCTS
+  router.get("/", async (req, res) => {
+    const qNew = req.query.new;
+    const qCategory = req.query.category;
+    console.log(req.query);
+    try {
+      let products;
+  
+      if (qNew) {
+        products = await Product.find().sort({ createdAt: -1 }).limit(1);
+      } else if (qCategory) {
+        products = await Product.find({
+          categories: {
+            $in: [qCategory],
+          },
+        });
+      } else {
+        products = await Product.find();
+      }
+  
+      res.status(200).json({result:"success",message:products});
+    } catch (err) {
+      res.status(500).json({result:"error",message:err.message});
     }
-    catch(err){
-        return res.status(500).json({status:"fail",message:err.message});
-    }
-})
-router.get('/find/:id',async(req,res)=>{
-    try{
-        const product=await Product.findById(req.params.id);
-        return res.status(200).json({status:"success",message:product});
-    }
-    catch(err){
-        return res.status(500).json({status:"fail",message:err.message});
-    }
-})
-// router.get('/',(req,res)=>{
-//     const category=req.query.category;
-//     let allProducts;
-//     if(category){
-//         allProducts = Product.find({
-//             categories:{
-//                 $in:[category],
-//             },
-//         })
-//     }
-//     else
-//     allProducts = Product.find();
-//     res.status(200).json({status:"success",message:allProducts});
-// })
+  });
+
 module.exports=router;

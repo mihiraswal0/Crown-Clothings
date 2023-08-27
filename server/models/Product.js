@@ -18,7 +18,7 @@ const productSchema=new mongoose.Schema({
         required:true,
     },
     size:{
-        type:Number,
+        type:Array,
         required:true,
     },
     price:{
@@ -27,6 +27,10 @@ const productSchema=new mongoose.Schema({
     } ,
     color:{
         type:String,
+    },
+    inStock:{
+        type:Boolean,
+        default:true,
     }
 
 
