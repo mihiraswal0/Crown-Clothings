@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Announcement from "../components/Annoucement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { useEffect,useState,useLocation } from "react";
+import axios from "axios";
 // import Newsletter from "../components/Newsletter";
 // import { mobile } from "../responsive";
 
@@ -110,7 +112,8 @@ const Button = styled.button`
   }
 `;
 
-const Product = () => {
+const Product = (cat,filters,sort) => {
+
   return (
     <Container>
       <Navbar />
