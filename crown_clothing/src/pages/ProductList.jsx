@@ -33,6 +33,7 @@ const Select = styled.select`
   margin-right: 20px;
 `;
 const Option = styled.option``;
+
 const ProductList = () => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
@@ -56,7 +57,7 @@ const ProductList = () => {
         <Filter>
           <FilterText>Filter Products:</FilterText>
           <Select name="color" onChange={handleFilters}>
-            <Option >Color</Option>
+            <Option disabled>Color</Option>
             <Option>white</Option>
             <Option>black</Option>
             <Option>red</Option>
@@ -65,7 +66,7 @@ const ProductList = () => {
             <Option>green</Option>
           </Select>
           <Select name="size" onChange={handleFilters}>
-            <Option >Size</Option>
+            <Option disabled>Size</Option>
             <Option>XS</Option>
             <Option>S</Option>
             <Option>M</Option>
@@ -83,6 +84,7 @@ const ProductList = () => {
         </Filter>
       </FilterContainer>
       <Products cat={cat} filters={filters} sort={sort} />
+      {/* <Newsletter /> */}
       <Footer />
     </Container>
   );
