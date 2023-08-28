@@ -1,52 +1,58 @@
-const express = require('express');
-const router=express.Router();
-const User=require('../models/User.js');
-const cryptojs=require('crypto-js');
-const jwt=require('jsonwebtoken');
-require('dotenv').config(); 
+const router = require("express").Router();
+const User = require("../models/User");
+const CryptoJS = require("crypto-js");
+const jwt = require("jsonwebtoken");
 
-router.post("/register",async(req,res)=>{
-     console.log(req.body);
-    
-    const newUser=new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: cryptojs.AES.encrypt(req.body.password,process.env.SECRET_KEY),
-        isAdmin:(req.body.isAdmin)?true:false
-    })
-    try{
-    const saveuser=await newUser.save();
-    res.status(400).json(saveuser);
-    }
-    catch(err){
-        res.status(500).json(err.message);
-    }
+//REGISTER
+router.post("/register", async (req, res) => {
+  const newUser = new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: CryptoJS.AES.encrypt(
+      req.body.password,
+      process.env.PASS_SEC
+    ).toString(),
+  });
 
- });
- router.post('/login',async(req,res)=>{
-    const {email, password} =req.body;
-    try{
-        const findUser=await User.findOne({email});
-        console.log(findUser);
-        if(!findUser)
-        {
-         return  res.status(500).json({status:"fail",message:"No User Found"});
-        
-        }
-        const decryptedpass=cryptojs.AES.decrypt(findUser.password,process.env.SECRET_KEY);
-        const hashedPassword=decryptedpass.toString(cryptojs.enc.Utf8);
-        // console.log(hashedPassword);
-        findUser.password = undefined;
-        if(password!=hashedPassword)
-        {
-            return res.status(500).json({status:"fail",message:"Invalid Password"});
-        }
-        const accessToken = jwt.sign({id:findUser._id,isAdmin:findUser.isAdmin},process.env.JWT_SECRET_KEY,{expiresIn:'3d'});
+  try {
+    const savedUser = await newUser.save();
+    res.status(201).json(savedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-        return res.json({status:"success",message:{...findUser,accessToken}});
-    }
-    catch(err){
-        return res.status(500).json({status:"fail",message:err.message});
-    }
- })
-module.exports=router;
+//LOGIN
+
+router.post("/login", async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    !user && res.status(401).json("Wrong credentials!");
+
+    const hashedPassword = CryptoJS.AES.decrypt(
+      user.password,
+      process.env.PASS_SEC
+    );
+    const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+
+    OriginalPassword !== req.body.password &&
+      res.status(401).json("Wrong credentials!");
+
+    const accessToken = jwt.sign(
+      {
+        id: user._id,
+        isAdmin: user.isAdmin,
+      },
+      process.env.JWT_SEC,
+      {expiresIn:"3d"}
+    );
+
+    const { password, ...others } = user._doc;
+
+    res.status(200).json({...others, accessToken});
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+module.exports = router;
