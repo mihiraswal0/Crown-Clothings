@@ -5,10 +5,10 @@ import ProductList from './pages/ProductList';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
-
-import {BrowserRouter,Route,Routes,Redirect} from 'react-router-dom';
+import {BrowserRouter,Route,Routes,Redirect,Link} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const App = () => {
-  const user=true;
+  const user=useSelector(state=>state.user.currentUser);
   return (
    <BrowserRouter>
       <Routes>
@@ -19,7 +19,7 @@ const App = () => {
         <Route path='/product/:id' element={<Product/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path="/register" element={<Register/>}></Route>
-        <Route path="/login" element={<Login/>
+        <Route path="/login" element={user?<Home/>:<Login/>
       }/>
       </Routes>
     </BrowserRouter>

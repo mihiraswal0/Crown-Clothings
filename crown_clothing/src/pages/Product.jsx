@@ -128,7 +128,7 @@ const Product = () => {
     const getProduct = async () => {
       try {
         const res = await axios.get("http://localhost:8000/api/products/find/" + id);
-        setProduct(res.data.message);
+        setProduct(res.data);
       } catch {}
     };
     getProduct();
