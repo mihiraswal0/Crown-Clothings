@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import { Outlet,RouterProvider,ScrollRestoration,createBrowserRouter} from "react-router-dom";
+import { productsData } from "./api/Api";
+import Product from "./components/Product";
 const Layout = () => {
   return (
     <div>
@@ -25,12 +27,12 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        // loader: productsData,
+         loader: productsData,
       },
-      // {
-      //   path: "/product/:id",
-      //   element: <Product />,
-      // },
+      {
+        path: "/product/:id",
+        element: <Product />,
+      },
       {
         path: "/cart",
         element: <Cart />,
