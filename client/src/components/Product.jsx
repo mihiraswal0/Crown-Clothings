@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { MdOutlineStar } from "react-icons/md";
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/bazarSlice';
+import { ToastContainer, toast } from "react-toastify";
+
 const Product = () => {
     const dispatch=useDispatch();
     const [details, Details] = useState({});
@@ -73,7 +75,7 @@ const Product = () => {
               </div>
             </div>
             <button
-              onClick={() =>
+               onClick={() =>
                 dispatch(
                   addToCart({
                     _id: details._id,
@@ -82,7 +84,8 @@ const Product = () => {
                     price: details.price,
                     quantity: baseQty,
                     description: details.description,
-                  }))
+                  })
+                ) & toast.success(`${details.title} is added`)
               }
               className="bg-black text-white py-3 px-6 active:bg-gray-800"
             >
@@ -95,7 +98,7 @@ const Product = () => {
           </p>
         </div>
       </div>
-      {/* <ToastContainer
+      <ToastContainer
         position="top-left"
         autoClose={2000}
         hideProgressBar={false}
@@ -106,7 +109,7 @@ const Product = () => {
         draggable
         pauseOnHover
         theme="dark"
-      /> */}
+      />
     </div>
   );
   
