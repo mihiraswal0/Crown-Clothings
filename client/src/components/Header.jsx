@@ -36,13 +36,14 @@ const Header = () => {
           </li>
         </ul>
         {/* //cart image */}
-    
+    <Link to='/cart'>
         <div className="relative">
               <img className="w-6" src={cartImg} alt="cartImg" />
               <span className="absolute w-6 top-2 left-0 text-sm flex items-center justify-center font-semibold font-titleFont">
                {productData.length}
               </span>
             </div>
+            </Link>
             {/* login image */}
             <img
               className="w-8 h-8 rounded-full"
