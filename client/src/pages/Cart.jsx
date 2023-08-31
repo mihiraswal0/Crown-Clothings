@@ -97,7 +97,7 @@ const Cart = () => {
               <span>
                 <HiOutlineArrowLeft />
               </span>
-              go shopping
+             Go Shopping
             </button>
           </Link>
         </div>
