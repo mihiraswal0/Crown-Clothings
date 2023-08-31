@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
-// import StripeCheckout from "react-stripe-checkout";
+import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 
 const Cart = () => {
@@ -51,7 +51,7 @@ const Cart = () => {
               <p className="flex items-center gap-4 text-base">
                 Subtotal{" "}
                 <span className="font-titleFont font-bold text-lg">
-                  ${totalAmt}
+                  Rs.{totalAmt}
                 </span>
               </p>
               <p className="flex items-start gap-4 text-base">
@@ -69,21 +69,21 @@ const Cart = () => {
               onClick={handleCheckout}
               className="text-base bg-black text-white w-full py-3 mt-6 hover:bg-gray-800 duration-300"
             >
-              proceed to checkout
+              Proceed to checkout
             </button>
-            {/* {payNow && (
+            {payNow && (
               <div className="w-full mt-6 flex items-center justify-center">
                 <StripeCheckout
-                  stripeKey="pk_test_51LXpmzBcfNkwYgIPXd3qq3e2m5JY0pvhaNZG7KSCklYpVyTCVGQATRH8tTWxDSYOnRTT5gxOjRVpUZmOWUEHnTxD00uxobBHkc"
-                  name="Bazar Online Shopping"
+                  stripeKey="pk_test_51LebC1SI0zwFEoXd6dWqGhx90AzFngcXyR6s94TUeOacIspTMjVp3Hu8qHk17mRoKFYdKGBGw8S2c0UEZi6LFA5Q00rieQ7M2g"
+                  name="Crown Clothing"
                   amount={totalAmt * 100}
-                  label="Pay to bazar"
-                  description={`Your Payment amount is $${totalAmt}`}
+                  label="Pay to Crown Clothing"
+                  description={`Your Payment amount is Rs${totalAmt}`}
                   token={payment}
                   email={userInfo.email}
                 />
               </div>
-            )} */}
+            )}
           </div>
         </div>
       ) : (
